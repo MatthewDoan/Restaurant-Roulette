@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>    
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+
+    <title>{% block tabtitle %}Resturant Roulette{% endblock tabtitle %}</title>
+  </head>
+  <body onload="getLocation()">
+    <style>
+    nav .dropdown:hover > div.dropdown-menu {
+      display: block;    
+      margin-top: 0;
+  
+    }
+
+    input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
+#test{
+  text-align: ceneter; 
+}
+    
+    
+    </style>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <a class="navbar-brand" href="/">Resturant Roulette</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+          </li>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+
+
+    <div class="container-lg">
+      <div class="col-6 mx-auto">
+          <div class="card mb-2">
+    <div id="accordion">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            
+            <button class="btn btn-collapse" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Randomizer
+            </button>
+          </h5>
+        </div>
+    
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+
+
+            <p id="location"></p>
+            <a href="#" id="randomButton" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Randomize</a>     
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h5 class="mb-0">
+            <button class="btn btn-collapse collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Filters
+            </button>
+          </h5>
+        </div>
+
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+          <div class="card-body">
+
+            
+            <div class="switch">
+      
+              <div id="starDrop" class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Any rating
+                </button>
+                <ul class="dropdown-menu">
+                  <li><a href="#">&#x2605;</a></li>
+                  <li><a href="#">&#x2605;&#x2605;</a></li>
+                  <li><a href="#">&#x2605;&#x2605;&#x2605;</a></li>
+                  <li><a href="#">&#x2605;&#x2605;&#x2605;&#x2605;</a></li>
+                  <li><a href="#">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</a></li>
+                </div>
+              </div>
+          
+      
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+              <label class="btn btn-secondary active">
+                <input type="radio" name="options" id="option1" autocomplete="off" checked> $
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option2" autocomplete="off"> $$
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option3" autocomplete="off"> $$$
+              </label>
+              <label class="btn btn-secondary">
+                <input type="radio" name="options" id="option4" autocomplete="off"> $$$$
+              </label>
+            </div>
+            <form class="form-inline">
+              <div id = "LongitudeDiv" class="form-group">
+                <label for="exampleInputName2" class="bmd-label-floating">Longitude</label>
+                <input type="number" class="form-control" id="Longitude">
+              </div>
+              <div id = "LatitudeDiv" class="form-group">
+                <label for="exampleInputEmail2" class="bmd-label-floating">Latitude</label>
+                <input type="number" class="form-control" id="Latitude">
+              </div>
+              <span class="form-group bmd-form-group"> <!-- needed to match padding for floating labels -->
+                <button type= "button" onclick="getLocation()" class="btn btn-primary">Get Location</button>
+              </span>
+              <div class="col-6">
+                <div id= "maxdist" class="form-group float-right">
+                <label id ="test" for="exampleInputName2" class="bmd-label-floating" >Max Distance</label>
+                <input type="number" class="form-control" id="exampleInputEmail2" >
+              </div>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+
+      </div>
+    </div>
+    
+      </div>
+
+    
+
+
+
+
+
+    {% block content %}
+    {% endblock %}
+
+    <script>
+
+  $(".dropdown-menu li a").click(function(){
+  
+  $(".dropdown .btn:first-child").html($(this).text()+' <span class="caret"></span>');
+  
+});
+
+
+
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }     
+      function showPosition(position) {
+
+
+        $('#Latitude').val(position.coords.latitude );
+        $('#Longitude').val(position.coords.longitude);
+        $('.bmd-form-group').addClass("is-focused");    
+      }
+
+
+  $("#randomButton").click(function(e) {
+    var star = $('#StarDrop').val();
+    var lat = $('#Latitude').val();
+    var long = $('#Longitude').val();
+
+
+    var formData = {'starDrop':star,'latitude':lat,'longitude':long};
+
+    console.log(formData);
+
+    e.preventDefault();
+      $.ajax({
+        url: '/postReq/',
+        type: "POST",
+        data: {'latitude':lat,'longitude':long},
+        success: function (d) {
+          if (d.is_taken) {
+            alert("A user with this username already exists.");
+          }
+        }
+      });
+  });
+
+
+
+      </script>
+</body>
+</html>
