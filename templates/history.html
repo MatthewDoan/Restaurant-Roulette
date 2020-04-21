@@ -35,7 +35,7 @@ input::-webkit-inner-spin-button {
 
     
     
-    </style>
+</style>
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/">Restaurant Roulette</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,24 +44,29 @@ input::-webkit-inner-spin-button {
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="nav-link" href="">Random</a>
+        <a class="nav-link" href="/">Random</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="history">History</a>
+        <a class="nav-link" href="">History</a>
       </li>
     </ul>
   </div>
 </nav>
 
-<div class="card col-6 mx-auto" style="width: 18rem;">
+
+
+{% for x in history%}
+<div class="card col-6 mx-auto" style="width: 40rem; text-align:left">
   <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-    <a href="#" class="card-link">Card link</a>
-    <a href="#" class="card-link">Another link</a>
+    <img src="{{x.image}}" class="rounded float-right"width="200" height="200">
+    <h5 class="card-title">{{x.name}}</h5>    
+    <p class="card-text">{{x.address1}}</p>
+    <p class="card-text">{{x.address2}}</p>
+    <a href="{{x.url}}" class="card-link">Yelp link</a>
   </div>
 </div>
+{%endfor%}
+
 
 
 
@@ -151,6 +156,7 @@ $(".switch .dropdown-menu.categories li a").click(function(){
 
 
         }
+
       });
   });
 

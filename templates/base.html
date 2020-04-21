@@ -36,6 +36,8 @@ input::-webkit-inner-spin-button {
     
     
     </style>
+
+ 
  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/">Restaurant Roulette</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +56,7 @@ input::-webkit-inner-spin-button {
 </nav>
 
 
-    <div class="container-lg">
+    <div class="container-xl" style="margin-top: 10%;">
       <div class="col-6 mx-auto">
           <div class="card mb-2">
     <div id="accordion">
@@ -69,7 +71,7 @@ input::-webkit-inner-spin-button {
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="card-body">
 
-            <div id = "randombutton" style="display:inline-block; vertical-align:middle; margin-top:7rem; margin-left:3rem;" >
+            <div id = "randombutton" style="display:inline-block; vertical-align:middle; margin-top:7rem; margin-left:3rem; margin-bottom: 5rem;" >
               <a href="#" id="randomButton" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Randomize</a> 
             </div>
 
@@ -83,7 +85,7 @@ input::-webkit-inner-spin-button {
 
 
               </div> 
-              <img id="imgurl"> 
+              <img id="imgurl" class ="rounded"> 
             </div>
 
 
@@ -265,7 +267,12 @@ $(".switch .dropdown-menu.categories li a").click(function(){
           $('#Resturantdata #imgurl').height(256);
 
 
-        }
+        },
+          error: function() { 
+          console.log("test");
+          alert("Error: No results change your filters change your location."); 
+        }      
+
       });
   });
 

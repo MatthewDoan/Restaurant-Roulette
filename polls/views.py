@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from .models import History
 
 import random
 
@@ -18,7 +19,7 @@ def base(request):
     return render(request, 'base.html', {})
 
 def history(request):
-    return render(request, 'history.html', {})    
+    return render(request, 'history.html', {'history':History.objects.all()})    
 
 
 @csrf_exempt
@@ -50,8 +51,21 @@ def postReq(request):
     print(Category)
     if(Category == 'any category<div class="ripple-container"></div>' or Category == "any category"):
         categories = "restaurants"
-    else:
-        categories = Category
+    if(Category == "asian"):
+        categories = "asianfusion"
+    if(Category == "american"):
+        categories = "tradamerican"
+    if(Category == "barbeque"):
+        categories = "bbq"
+    if(Category == "cafe"):
+        categories = "cafes"
+    if(Category == "fast food"):
+        categories= "hotdogs"
+    if(Category == "mediterranean"):
+        categories= "mediterranean"
+    if(Category == "vegan"):
+        categories= "vegan"            
+
 
     if(Price == 1 or Price == 5):
         Prices = "1,2,3,4"
@@ -71,23 +85,17 @@ def postReq(request):
     jsonParsed1 = (json.loads(jsonParsed))
     total = jsonParsed1["total"]
     print(total)
-
-    randomNumber = random.randint(1,50) -1 
+        
+    if(total>50):
+        total = 50
+    randomNumber = random.randint(1,total) -1 
     print(randomNumber)
     print(jsonParsed1["businesses"][randomNumber])
+    print(categories)
+
 
     randomRest = jsonParsed1["businesses"][randomNumber]
-    final = {'img':randomRest["image_url"], 'name':randomRest["name"], 'address':randomRest["location"]["display_address"], 'phone':randomRest["display_phone"]}
+    final = {'img':randomRest["image_url"], 'name':randomRest["name"], 'address':randomRest["location"]["display_address"], 'phone':randomRest["display_phone"],'phone':randomRest["display_phone"]}
+    h=History.objects.create(image = randomRest["image_url"], name = randomRest["name"], address1=randomRest["location"]["display_address"][0], address2=randomRest["location"]["display_address"][1], phone=randomRest["display_phone"], url=randomRest["url"])
     return JsonResponse(final)
 
-
-
-#Italian, Chinese/Asian, American, mediterranean, mexican, Fast food, Vegan, cafe, Barbeque 
-#meals 3 
-
-# Rating: 3
-# latitude: 42.960119999999996
-# longitude: -85.9063455
-# radius: 20
-# Category: Asian
-# Price: 3
