@@ -27,28 +27,31 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
-
-
-#test{
-  text-align: ceneter; 
+.switch{
+  display: inline-block;
 }
+
+
+
     
     
     </style>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="/">Resturant Roulette</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-          </li>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">Restaurant Roulette</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="">Random</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="history">History</a>
+      </li>
+    </ul>
+  </div>
+</nav>
 
 
     <div class="container-lg">
@@ -59,18 +62,32 @@ input::-webkit-inner-spin-button {
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
             
-            <button class="btn btn-collapse" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Randomizer
-            </button>
+            <button class="btn btn-collapse" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Randomizer</button>
           </h5>
         </div>
     
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="card-body">
 
+            <div id = "randombutton" style="display:inline-block; vertical-align:middle; margin-top:7rem; margin-left:3rem;" >
+              <a href="#" id="randomButton" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Randomize</a> 
+            </div>
 
-            <p id="location"></p>
-            <a href="#" id="randomButton" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Randomize</a>     
+            <div id="Resturantdata" style="display:inline-flex; float:right;"> 
+
+              <div id = "restText" style="margin-right:4rem">
+                <h1 class="display-4"></h1>
+                <p class="lead"></p>
+                <p class="lead 1"></p>
+                <p class="lead 2"></p>
+
+
+              </div> 
+              <img id="imgurl"> 
+            </div>
+
+
+
           </div>
         </div>
       </div>
@@ -89,42 +106,53 @@ input::-webkit-inner-spin-button {
             
             <div class="switch">
       
-              <div id="starDrop" class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  Any rating
-                </button>
-                <ul class="dropdown-menu">
-                  <li><a href="#">&#x2605;</a></li>
-                  <li><a href="#">&#x2605;&#x2605;</a></li>
-                  <li><a href="#">&#x2605;&#x2605;&#x2605;</a></li>
-                  <li><a href="#">&#x2605;&#x2605;&#x2605;&#x2605;</a></li>
-                  <li><a href="#">&#x2605;&#x2605;&#x2605;&#x2605;&#x2605;</a></li>
+              <div id="Categories" class="dropdown categories">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Any Category</button>
+                <ul class="dropdown-menu categories">
+                  <li><a href="#">Asian</a></li>
+                  <li><a href="#">American</a></li>
+                  <li><a href="#">Barbeque</a></li>
+                  <li><a href="#">Cafe</a></li>
+                  <li><a href="#">Fast Food</a></li>
+                  <li><a href="#">Mediterranean</a></li>
+                  <li><a href="#">Vegan</a></li>
+                  <li><a href="#">Any Category</a></li>  
                 </div>
+   
+                <div id="starDrop" class="dropdown rating">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value = "0">Any rating</button>
+                  <ul class="dropdown-menu rating">
+                    <li><a href="#" value = "1">&#x2605;</a></li>
+                    <li><a href="#" value = "2">&#x2605;&#x2605;</a></li>
+                    <li><a href="#" value = "3">&#x2605;&#x2605;&#x2605;</a></li>
+                    <li><a href="#" value = "4">&#x2605;&#x2605;&#x2605;&#x2605;</a></li>
+                    <li><a href="#" value = "5">Any Rating</a></li>
+                  </div>
+                
               </div>
-          
-      
-            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+  
+            <div class="btn-group btn-group-toggle" data-toggle="buttons" id ="GroupButton">
               <label class="btn btn-secondary active">
-                <input type="radio" name="options" id="option1" autocomplete="off" checked> $
+                <input type="radio" name="options" id="option1" autocomplete="off" checked value = "1"> $
               </label>
               <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option2" autocomplete="off"> $$
+                <input type="radio" name="options" id="option2" autocomplete="off" value = "2"> $$
               </label>
               <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option3" autocomplete="off"> $$$
+                <input type="radio" name="options" id="option3" autocomplete="off" value = "3"> $$$
               </label>
               <label class="btn btn-secondary">
-                <input type="radio" name="options" id="option4" autocomplete="off"> $$$$
+                <input type="radio" name="options" id="option4" autocomplete="off" value="4"> $$$$ 
               </label>
             </div>
             <form class="form-inline">
-              <div id = "LongitudeDiv" class="form-group">
-                <label for="exampleInputName2" class="bmd-label-floating">Longitude</label>
-                <input type="number" class="form-control" id="Longitude">
-              </div>
               <div id = "LatitudeDiv" class="form-group">
                 <label for="exampleInputEmail2" class="bmd-label-floating">Latitude</label>
                 <input type="number" class="form-control" id="Latitude">
+              </div>
+              <div id = "LongitudeDiv" class="form-group">
+                <label for="exampleInputName2" class="bmd-label-floating">Longitude</label>
+                <input type="number" class="form-control" id="Longitude">
               </div>
               <span class="form-group bmd-form-group"> <!-- needed to match padding for floating labels -->
                 <button type= "button" onclick="getLocation()" class="btn btn-primary">Get Location</button>
@@ -132,7 +160,7 @@ input::-webkit-inner-spin-button {
               <div class="col-6">
                 <div id= "maxdist" class="form-group float-right">
                 <label id ="test" for="exampleInputName2" class="bmd-label-floating" >Max Distance</label>
-                <input type="number" class="form-control" id="exampleInputEmail2" >
+                <input type="number" class="form-control" id="maxDisttance" >
               </div>
 
               </div>
@@ -158,11 +186,23 @@ input::-webkit-inner-spin-button {
 
     <script>
 
-  $(".dropdown-menu li a").click(function(){
-  
-  $(".dropdown .btn:first-child").html($(this).text()+' <span class="caret"></span>');
+  $(".switch .dropdown-menu.rating li a").click(function(){
+    
+  $(".switch .dropdown.rating .btn:first-child").html($(this).text());
   
 });
+
+
+$(".switch .dropdown-menu.categories li a").click(function(){
+  
+  $(".switch .dropdown.categories .btn:first-child").html($(this).text());
+  
+});
+
+
+
+
+
 
 
 
@@ -177,19 +217,34 @@ input::-webkit-inner-spin-button {
       function showPosition(position) {
 
 
-        $('#Latitude').val(position.coords.latitude );
+        $('#Latitude').val(position.coords.latitude);
         $('#Longitude').val(position.coords.longitude);
         $('.bmd-form-group').addClass("is-focused");    
       }
 
 
   $("#randomButton").click(function(e) {
-    var star = $('#StarDrop').val();
+    var star = $('.switch #starDrop #dropdownMenuButton').html();
+    if(star.length < 5){
+      star = star.length
+    }
+    else{
+      star = 5
+    }
+
+    var Price = $("input[name='options']:checked").val();
+
+    var Category = $('.switch #Categories #dropdownMenuButton').html();
+
+
+    var radius = $('#maxDisttance').val();
     var lat = $('#Latitude').val();
     var long = $('#Longitude').val();
 
+    console.log(star,Category);
 
-    var formData = {'starDrop':star,'latitude':lat,'longitude':long};
+
+    var formData = {'Rating':star,'latitude':lat,'longitude':long,'radius':radius,'Category': Category, 'Price': Price};
 
     console.log(formData);
 
@@ -197,11 +252,19 @@ input::-webkit-inner-spin-button {
       $.ajax({
         url: '/postReq/',
         type: "POST",
-        data: {'latitude':lat,'longitude':long},
+        data: {'Rating':star,'latitude':lat,'longitude':long,'radius':radius,'Category': Category, 'Price':Price},
         success: function (d) {
-          if (d.is_taken) {
-            alert("A user with this username already exists.");
-          }
+          console.log(d);
+          $('#Resturantdata #restText .display-4').html(d.name);
+          $('#Resturantdata #restText .lead').html(d.address[0]);
+          $('#Resturantdata #restText .lead.1').html(d.address[1]);
+          $('#Resturantdata #restText .lead.2 ').html(d.phone);
+
+          $("#Resturantdata #imgurl").attr("src",d.img);
+          $('#Resturantdata #imgurl').width(256); // Units are assumed to be pixels
+          $('#Resturantdata #imgurl').height(256);
+
+
         }
       });
   });
@@ -211,3 +274,5 @@ input::-webkit-inner-spin-button {
       </script>
 </body>
 </html>
+
+

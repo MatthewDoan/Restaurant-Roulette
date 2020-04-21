@@ -5,5 +5,7 @@ from . import views
 
 urlpatterns = [
     path('', views.base),
-    path('postReq/', views.postReq)
+    path('postReq/', views.postReq),
+    path('history/', views.history)
+
 ]

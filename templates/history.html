@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css" integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>    
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+
+    <title>{% block tabtitle %}Resturant Roulette{% endblock tabtitle %}</title>
+  </head>
+  <body onload="getLocation()">
+    <style>
+    nav .dropdown:hover > div.dropdown-menu {
+      display: block;    
+      margin-top: 0;
+  
+    }
+
+    input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.switch{
+  display: inline-block;
+}
+
+
+
+    
+    
+    </style>
+ <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">Restaurant Roulette</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="">Random</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="history">History</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="card col-6 mx-auto" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+    <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+    <a href="#" class="card-link">Card link</a>
+    <a href="#" class="card-link">Another link</a>
+  </div>
+</div>
+
+
+
+
+    {% block content %}
+    {% endblock %}
+
+    <script>
+
+  $(".switch .dropdown-menu.rating li a").click(function(){
+    
+  $(".switch .dropdown.rating .btn:first-child").html($(this).text());
+  
+});
+
+
+$(".switch .dropdown-menu.categories li a").click(function(){
+  
+  $(".switch .dropdown.categories .btn:first-child").html($(this).text());
+  
+});
+
+
+
+
+
+
+
+
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+      }     
+      function showPosition(position) {
+
+
+        $('#Latitude').val(position.coords.latitude);
+        $('#Longitude').val(position.coords.longitude);
+        $('.bmd-form-group').addClass("is-focused");    
+      }
+
+
+  $("#randomButton").click(function(e) {
+    var star = $('.switch #starDrop #dropdownMenuButton').html();
+    if(star.length < 5){
+      star = star.length
+    }
+    else{
+      star = 5
+    }
+
+    var Price = $("input[name='options']:checked").val();
+
+    var Category = $('.switch #Categories #dropdownMenuButton').html();
+
+
+    var radius = $('#maxDisttance').val();
+    var lat = $('#Latitude').val();
+    var long = $('#Longitude').val();
+
+    console.log(star,Category);
+
+
+    var formData = {'Rating':star,'latitude':lat,'longitude':long,'radius':radius,'Category': Category, 'Price': Price};
+
+    console.log(formData);
+
+    e.preventDefault();
+      $.ajax({
+        url: '/postReq/',
+        type: "POST",
+        data: {'Rating':star,'latitude':lat,'longitude':long,'radius':radius,'Category': Category, 'Price':Price},
+        success: function (d) {
+          console.log(d);
+          $('#Resturantdata #restText .display-4').html(d.name);
+          $('#Resturantdata #restText .lead').html(d.address[0]);
+          $('#Resturantdata #restText .lead.1').html(d.address[1]);
+          $('#Resturantdata #restText .lead.2 ').html(d.phone);
+
+          $("#Resturantdata #imgurl").attr("src",d.img);
+          $('#Resturantdata #imgurl').width(256); // Units are assumed to be pixels
+          $('#Resturantdata #imgurl').height(256);
+
+
+        }
+      });
+  });
+
+
+
+      </script>
+</body>
+</html>
+
+
