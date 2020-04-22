@@ -5,7 +5,7 @@ This project was built in Django Python and Bootstrap
 Deployed currently on: [matthewtdoan.com](https://www.matthewtdoan.com)
 Using AWS lightsail and apache
 
-#Required
+# Required
 pip install yelpapi
 pip install pillow
 pip install django
