@@ -72,15 +72,15 @@ input::-webkit-inner-spin-button {
           <div class="card-body">
 
             <div id = "randombutton" style="display:inline-block; vertical-align:middle; margin-top:7rem; margin-left:3rem; margin-bottom: 5rem;" >
-              <a href="#" id="randomButton" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Randomize</a> 
+              <a id="randomButton" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Randomize</a> 
             </div>
 
             <div id="Resturantdata" style="display:inline-flex; float:right;"> 
 
               <div id = "restText" style="margin-right:4rem">
-                <h1 class="display-4"></h1>
-                <p class="lead"></p>
-                <p class="lead 1"></p>
+                <h3 class="display-5"></h1>
+                  <p class="lead">Click the "randomize" button to find a randomly picked restaurant near you!</p>
+                  <p class="lead 1">Use the filter tabs to specify the results you get.</p>
                 <p class="lead 2"></p>
 
 
@@ -257,7 +257,7 @@ $(".switch .dropdown-menu.categories li a").click(function(){
         data: {'Rating':star,'latitude':lat,'longitude':long,'radius':radius,'Category': Category, 'Price':Price},
         success: function (d) {
           console.log(d);
-          $('#Resturantdata #restText .display-4').html(d.name);
+          $('#Resturantdata #restText .display-5').html(d.name);
           $('#Resturantdata #restText .lead').html(d.address[0]);
           $('#Resturantdata #restText .lead.1').html(d.address[1]);
           $('#Resturantdata #restText .lead.2 ').html(d.phone);

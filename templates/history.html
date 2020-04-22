@@ -55,7 +55,7 @@ input::-webkit-inner-spin-button {
 
 
 
-{% for x in history%}
+{% for x in history reversed%}
 <div class="card col-6 mx-auto" style="width: 40rem; text-align:left">
   <div class="card-body">
     <img src="{{x.image}}" class="rounded float-right"width="200" height="200">

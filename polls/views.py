@@ -40,7 +40,7 @@ def postReq(request):
 
     #Optional
     if(radius != ""):
-        radius = int(radius) * 1609.34
+        radius = int(radius) * 1609
         if(radius > 40000):
             radius = 40000
     if(radius == ""):
