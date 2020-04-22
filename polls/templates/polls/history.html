@@ -1,0 +1,32 @@
+{% extends 'polls/base.html' %}
+<style>
+  nav .dropdown:hover > div.dropdown-menu {
+    display: block;    
+    margin-top: 0;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .switch{
+    display: inline-block;
+  }
+</style>
+{% block content %}
+{% for x in history reversed%}
+<div class="card col-6 mx-auto" style="max-width:600px;margin-top:2px;">
+  <div class="card-body">
+    <img src="{{x.image}}" class="rounded float-right" style='max-width:8rem;'>
+    <h5 class="card-title">{{x.name}}</h5>    
+    <p class="card-text">{{x.address1}}</p>
+    <p class="card-text">{{x.address2}}</p>
+    <a href="{{x.url}}" class="card-link">Yelp link</a>
+  </div>
+</div>
+{%endfor%}
+{% endblock %}
+</body>
+</html>
+
+

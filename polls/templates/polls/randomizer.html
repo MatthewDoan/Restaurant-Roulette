@@ -1,0 +1,163 @@
+{% extends 'polls/base.html' %}
+{% block content %}
+<div class="w-75 mx-auto" style='max-width:1000px;margin-top:10px;'>
+  <div class="card mb-2">
+    <div id="accordion">
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-collapse" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">Randomizer</button>
+          </h5>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+          <div class="card-body">
+            <div id="randombutton" style='text-align:center;margin-bottom:5px;'>
+              <a id="randomButton" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Randomize</a> 
+            </div>
+            <div id='placeholderText' style='text-align:center'>
+              <p class='lead'>Click the "randomize" button to find a randomly picked restaurant near you!</p>
+              <p class='lead'>Use the filter tabs to specify the results you get.</p>
+            </div>
+            <div class="card mx-auto" id='rCard' style='max-width:600px;'>
+              <div>
+                <img src='' class="card-img-top">
+              </div>
+              <div class="card-body" style='text-align:center;'>
+                <h5 class="card-title" id='rTitle'></h5>
+                <p class="card-text" id='rAdd1'></p>
+                <p class='card-text' id='rAdd2'></p>
+                <p class='card-text' id='rPhone'></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h5 class="mb-0">
+            <button class="btn btn-collapse collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Filters
+            </button>
+          </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+          <div class="card-body">
+            <div class="switch">
+              <div id="Categories" class="dropdown categories">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" style='margin-bottom:3px;' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Any Category</button>
+                <ul class="dropdown-menu categories">
+                  <li><a href="#">Asian</a></li>
+                  <li><a href="#">American</a></li>
+                  <li><a href="#">Barbeque</a></li>
+                  <li><a href="#">Cafe</a></li>
+                  <li><a href="#">Fast Food</a></li>
+                  <li><a href="#">Mediterranean</a></li>
+                  <li><a href="#">Vegan</a></li>
+                  <li><a href="#">Any Category</a></li>  
+                </div>
+                <div id="starDrop" class="dropdown rating">
+                  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" style='margin-bottom:3px;' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" value = "0">Any Rating</button>
+                  <ul class="dropdown-menu rating">
+                    <li><a href="#" value = "1">&#x2605;</a></li>
+                    <li><a href="#" value = "2">&#x2605;&#x2605;</a></li>
+                    <li><a href="#" value = "3">&#x2605;&#x2605;&#x2605;</a></li>
+                    <li><a href="#" value = "4">&#x2605;&#x2605;&#x2605;&#x2605;</a></li>
+                    <li><a href="#" value = "5">Any Rating</a></li>
+                  </div>
+                  <div class="btn-group btn-group-toggle" style='margin-bottom:3px;' data-toggle="buttons" id ="GroupButton">
+                    <label class="btn btn-secondary active">
+                      <input type="radio" name="options" id="option1" autocomplete="off" checked value = "1"> $
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="options" id="option2" autocomplete="off" value = "2"> $$
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="options" id="option3" autocomplete="off" value = "3"> $$$
+                    </label>
+                    <label class="btn btn-secondary">
+                      <input type="radio" name="options" id="option4" autocomplete="off" value="4"> $$$$ 
+                    </label>
+                  </div>
+              </div>
+            <form class="form">
+              <div id = "LatitudeDiv" class="form-group">
+                <label for="exampleInputEmail2" class="bmd-label-floating">Latitude</label>
+                <input type="number" class="form-control" id="Latitude">
+              </div>
+              <div id = "LongitudeDiv" class="form-group">
+                <label for="exampleInputName2" class="bmd-label-floating">Longitude</label>
+                <input type="number" class="form-control" id="Longitude">
+              </div>
+              <div id= "maxdist" class="form-group">
+                <label id ="test" for="exampleInputName2" class="bmd-label-floating" >Max Distance</label>
+                <input type="number" class="form-control" id="maxDisttance" >
+              </div>
+              <span class="form-group bmd-form-group"> <!-- needed to match padding for floating labels -->
+                <button type= "button" onclick="getLocation()" class="btn btn-primary">Get Location</button>
+              </span>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<script>
+$(document).ready(function(){
+  $('#rCard').hide();
+});
+$(".switch .dropdown-menu.rating li a").click(function(){
+  $(".switch .dropdown.rating .btn:first-child").html($(this).text());
+});
+$(".switch .dropdown-menu.categories li a").click(function(){
+  $(".switch .dropdown.categories .btn:first-child").html($(this).text());
+});
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}     
+function showPosition(position) {
+  $('#Latitude').val(position.coords.latitude);
+  $('#Longitude').val(position.coords.longitude);
+  $('.bmd-form-group').addClass("is-focused");    
+}
+$("#randomButton").click(function(e) {
+  var star = $('.switch #starDrop #dropdownMenuButton').html();
+  if(star.length < 5){
+    star = star.length
+  }
+  else{
+    star = 5
+  }
+  var Price = $("input[name='options']:checked").val();
+  var Category = $('.switch #Categories #dropdownMenuButton').html();
+  var radius = $('#maxDisttance').val();
+  var lat = $('#Latitude').val();
+  var long = $('#Longitude').val();
+  var formData = {'Rating':star,'latitude':lat,'longitude':long,'radius':radius,'Category': Category, 'Price': Price};
+  e.preventDefault();
+  $.ajax({
+    url: '/postReq/',
+    type: "POST",
+    data: {'Rating':star,'latitude':lat,'longitude':long,'radius':radius,'Category': Category, 'Price':Price},
+    success: function (d) {
+      $('#placeholderText').hide();
+      $('#rCard').show();
+      $('#rTitle').html(d.name);
+      $('#rAdd1').html(d.address[0]);
+      $('#rAdd2').html(d.address[1]);
+      $('#rPhone').html(d.phone);
+      $("#rCard img").attr("src",d.img);
+    },
+      error: function() { 
+      console.log("test");
+      alert("Error: No results change your filters change your location."); 
+    }      
+  });
+});
+</script>
+
+{% endblock content %}

@@ -25,24 +25,19 @@ SECRET_KEY = 'md%7r$!hc+xhj2@8ct8+yg0axaj^xq!efk3ik0-2#)@d19r-dd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['matthewtdoan.com','3.89.92.193']
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls.apps.PortfolioConfig'
-
-
-
-
+    'polls.apps.PortfolioConfig',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +119,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+SECURE_SSL_REDIRECT=True

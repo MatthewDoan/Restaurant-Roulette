@@ -16,10 +16,10 @@ apiKey ='nYjIQGRlDSimIZvPoagwvblHh_MhxAZJWDdd4fRlwfina_B_fOWL6rWbRkOhrq6a8KWT5xn
 
 
 def base(request):
-    return render(request, 'base.html', {})
+    return render(request, 'polls/randomizer.html', {})
 
 def history(request):
-    return render(request, 'history.html', {'history':History.objects.all()})    
+    return render(request, 'polls/history.html', {'history':History.objects.all()})    
 
 
 @csrf_exempt

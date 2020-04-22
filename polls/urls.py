@@ -7,5 +7,4 @@ urlpatterns = [
     path('', views.base),
     path('postReq/', views.postReq),
     path('history/', views.history)
-
 ]
